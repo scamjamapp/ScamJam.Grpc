@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package alerts_proto;
+
+option csharp_namespace = "ScamJam.Grpc";
+
+import "google/protobuf/empty.proto";
+
+service TrayClientAlerts {
+  rpc TrayClient(stream TrayClientAlert) returns (TrayClientReply);
+}
+
+service DnsServerTrayClientAlerts {
+  rpc Ui(stream DnsAlert) returns (google.protobuf.Empty);
+}
+
+
+enum Category {
+  TIF = 0;
+  POPUP = 1;
+  DYN_DNS = 2;
+  NRD = 3;
+  TLD = 4;
+  REMOTE = 5;
+}
+
+message DnsAlert {
+  string hostname = 1;
+  Category category = 2;
+}
+
+message TrayClientAlert {
+  optional string hostName = 1;
+  optional string appName = 2;
+  Category category = 3;
+}
+
+
+enum TrayClientUserResponse {
+  ACKNOWLEDGE = 0;
+  ALLOW_ONCE = 1;
+  ALLOW_ADD_ALLOWLIST = 2;
+
+}
+
+message TrayClientReply {
+  TrayClientUserResponse user_response = 1;
+}
