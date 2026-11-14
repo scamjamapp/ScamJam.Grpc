@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package alerts_proto;
 
-option csharp_namespace = "Grpc";
+option csharp_namespace = "ScamJam.Grpc";
 
 import "google/protobuf/empty.proto";
 
